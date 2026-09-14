@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Helmet Detection App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="app-card">
+        <header class="topbar">
+          <div class="brand">
+            <span class="brand-icon">🧢</span>
+            <div>
+              <h1 data-i18n="title">Helmet Detection App</h1>
+            </div>
+          </div>
+
+          <label class="lang-select">
+            <span data-i18n="language">Language</span>
+            <select id="languageSelect">
+              <option value="en">English</option>
+              <option value="ur">اردو</option>
+            </select>
+          </label>
+        </header>
+
+        <p class="subtitle" data-i18n="caption">
+          Upload a bike image and the model will classify whether the rider is wearing a helmet or not.
+        </p>
+
+        <div class="mode-row">
+          <label class="mode-option active">
+            <input type="radio" name="mode" value="single" checked />
+            <span data-i18n="single">Single Image</span>
+          </label>
+          <label class="mode-option">
+            <input type="radio" name="mode" value="folder" />
+            <span data-i18n="folder">Folder Upload</span>
+          </label>
+          <label class="mode-option">
+            <input type="radio" name="mode" value="camera" />
+            <span data-i18n="camera">Webcam</span>
+          </label>
+        </div>
+
+        <section class="panel single-panel active-panel" data-panel="single">
+          <label class="upload-box" for="singleUpload">
+            <input id="singleUpload" type="file" accept="image/*" />
+            <span data-i18n="upload">Choose an image</span>
+          </label>
+          <div class="preview-wrap hidden" id="singlePreviewWrap">
+            <img id="singlePreview" alt="uploaded preview" />
+          </div>
+          <div class="result-box hidden" id="singleResultBox">
+            <div class="status-row">
+              <strong data-i18n="status">Status</strong>
+              <span id="singleStatus">Helmet Detected</span>
+            </div>
+            <p id="singleDetail">The rider appears to be wearing a helmet.</p>
+            <div class="metric-box">
+              <span data-i18n="confidence">Confidence</span>
+              <strong id="singleConfidence">92.45%</strong>
+            </div>
+            <div class="result-preview-wrap hidden" id="singleResultPreviewWrap">
+              <img id="singleResultImage" alt="result preview" />
+            </div>
+          </div>
+        </section>
+
+        <section class="panel folder-panel" data-panel="folder">
+          <label class="upload-box" for="folderUpload">
+            <input id="folderUpload" type="file" accept="image/*" multiple />
+            <span data-i18n="folder_upload">Upload multiple images</span>
+          </label>
+          <div id="folderPreviewList" class="folder-list"></div>
+        </section>
+
+        <section class="panel camera-panel" data-panel="camera">
+          <label class="upload-box camera-box" for="cameraUpload">
+            <input id="cameraUpload" type="file" accept="image/*" capture="environment" />
+            <span data-i18n="camera_upload">Take a picture</span>
+          </label>
+          <div class="preview-wrap hidden" id="cameraPreviewWrap">
+            <img id="cameraPreview" alt="camera preview" />
+          </div>
+          <div class="result-box hidden" id="cameraResultBox">
+            <div class="status-row">
+              <strong data-i18n="status">Status</strong>
+              <span id="cameraStatus">No Helmet Detected</span>
+            </div>
+            <p id="cameraDetail">The rider appears to be without a helmet.</p>
+            <div class="metric-box">
+              <span data-i18n="confidence">Confidence</span>
+              <strong id="cameraConfidence">88.12%</strong>
+            </div>
+            <div class="result-preview-wrap hidden" id="cameraResultPreviewWrap">
+              <img id="cameraResultImage" alt="camera result preview" />
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
