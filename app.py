@@ -88,6 +88,8 @@ def get_text(lang):
 
 @st.cache_resource
 def load_yolo_model():
+    if not YOLO_MODEL_PATH.exists():
+        return None
     return YOLO(str(YOLO_MODEL_PATH))
 
 
@@ -149,6 +151,16 @@ def normalize_label(label):
 
 
 def analyze_image(image):
+    if yolo_model is None:
+        yolo_output = {
+            "label": "unavailable",
+            "status": text["model_unavailable"],
+            "detail": "YOLO weights are not available in this deployment.",
+            "confidence": 0.0,
+            "annotated": image,
+        }
+        return {"yolo": yolo_output, "ssd": analyze_with_ssd(image)}
+
     image_np = np.array(image)
     with st.spinner(text["detecting"]):
         yolo_results = yolo_model(image_np, imgsz=640, conf=0.25)
